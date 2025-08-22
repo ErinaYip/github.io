@@ -79,7 +79,7 @@ export const profileConfig: ProfileConfig = {
 		{
 			name: "Email",
 			icon: "fa6-solid:envelope",
-			url: "mail:k@erina.top",
+			url: "mailto:k@erina.top",
 		},
 	],
 };
