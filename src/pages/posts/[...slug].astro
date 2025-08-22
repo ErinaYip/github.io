@@ -1,5 +1,6 @@
 ---
 import path from "node:path";
+import Comment from "@components/Comment.astro";
 import License from "@components/misc/License.astro";
 import Markdown from "@components/misc/Markdown.astro";
 import I18nKey from "@i18n/i18nKey";
@@ -106,8 +107,6 @@ const jsonLd = {
                 <Content />
             </Markdown>
 
-            {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
-
         </div>
     </div>
 
@@ -131,6 +130,17 @@ const jsonLd = {
                 <Icon name="material-symbols:chevron-right-rounded" class="text-[2rem] text-[var(--primary)]" />
             </div>}
         </a>
+    </div>
+
+    <div class="w-full rounded-[var(--radius-large)] overflow-hidden relative mb-4">
+        <Comment
+            repo="ErinaYip/github.io"
+            repoId="R_kgDOPhuwHQ"
+            category="Announcements"
+            categoryId="DIC_kwDOPhuwHc4CudiX"
+        /><br>
+
+        {licenseConfig.enable && <License title={entry.data.title} slug={entry.slug} pubDate={entry.data.published} class="mb-6 rounded-xl license-container onload-animation"></License>}
     </div>
 
 </MainGridLayout>

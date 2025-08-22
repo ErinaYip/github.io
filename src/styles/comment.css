@@ -1,0 +1,16 @@
+/* public/giscus-custom.css */
+:root {
+  --giscus-primary: #3790ff;
+  --giscus-secondary: #546e7a;
+  --giscus-background: #ffffff;
+  --giscus-border: #e0e0e0;
+  --giscus-text: #333333;
+}
+
+[data-theme="dark"] {
+  --giscus-primary: #6ab0ff;
+  --giscus-secondary: #90a4ae;
+  --giscus-background: #1a1a1a;
+  --giscus-border: #333333;
+  --giscus-text: #ffffff;
+}
