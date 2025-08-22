@@ -3,6 +3,8 @@ dist/
 
 # generated types
 .astro/
+.vscode/
+.guides/
 
 # dependencies
 node_modules/
@@ -29,5 +31,3 @@ yarn.lock
 # ide
 .idea
 *.iml
-.vscode
-.guides
