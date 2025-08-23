@@ -47,6 +47,10 @@
     @apply flex;
 }
 
+.link-card__favicon {
+    @apply !my-0 mr-1 h-4 w-4 pointer-events-none;
+}
+
 .link-card__domain-name {
     @apply text-black/50 dark:text-white/50 text-xs;
 }
