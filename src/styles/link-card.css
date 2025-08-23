@@ -4,6 +4,7 @@
 
 .link-card {
     @apply flex min-h-32 overflow-hidden rounded-xl transition-colors !no-underline !m-0 !p-0
+    !rounded-[var(--radius-large)]
     bg-[var(--card-bg)] hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]
     ring-1 ring-[var(--btn-plain-bg-hover)] active:ring-[var(--btn-plain-bg-active)];
 }
@@ -37,6 +38,7 @@
 
 .link-card__description {
     @apply text-black/75 dark:text-white/75 mt-1 text-sm line-clamp-2;
+    display: flex;
 }
 
 .link-card__metadata {
@@ -60,11 +62,19 @@
 }
 
 .link-card__thumbnail {
-    @apply w-1/4 md:max-w-64 pr-6 pt-4;
+    @apply w-1/4 md:max-w-64 pr-6;
+    display: flex;
+    align-items: center;
 }
 
 .link-card__image {
-    @apply h-24 w-48 !my-0 object-contain md:object-cover !rounded-none pointer-events-none;
+    @apply !my-0 object-contain md:object-cover !rounded-none pointer-events-none;
+}
+
+.link-card__avatar {
+    @apply h-24 w-24 !my-0 object-contain mr-2
+    rounded-[var(--radius-large)] bg-[var(--btn-regular-bg)]
+    md:object-cover pointer-events-none;
 }
 
 .link-card__thumbnail--default > .link-card__image {
