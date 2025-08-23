@@ -18,6 +18,7 @@ import remarkSectionize from "remark-sectionize";
 import { expressiveCodeConfig } from "./src/config.ts";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
 import { pluginLanguageBadge } from "./src/plugins/expressive-code/language-badge.ts";
+import fuwariLinkCard from "./src/plugins/fuwari-link-card.ts";
 import { AdmonitionComponent } from "./src/plugins/rehype-component-admonition.mjs";
 import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.mjs";
 import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
@@ -102,6 +103,9 @@ export default defineConfig({
 		}),
 		svelte(),
 		sitemap(),
+		fuwariLinkCard({
+			internalLink: { enabled: true },
+		}),
 	],
 	markdown: {
 		remarkPlugins: [
