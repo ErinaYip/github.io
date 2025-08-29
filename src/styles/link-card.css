@@ -1,11 +1,11 @@
 .link-card__container {
-    @apply mb-4;
+    @apply mb-4 ;
 }
 
 .link-card {
     @apply flex min-h-32 overflow-hidden rounded-xl transition-colors !no-underline !m-0 !p-0
     !rounded-[var(--radius-large)]
-    bg-[var(--card-bg)] hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]
+    bg-[var(--btn-regular-bg)] hover:bg-[var(--btn-regular-bg-hover)] active:bg-[var(--btn-plain-bg-active)]
     ring-1 ring-[var(--btn-plain-bg-hover)] active:ring-[var(--btn-plain-bg-active)];
 }
 
@@ -19,7 +19,7 @@
 }
 
 .link-card__title::before {
-    @apply content-[''] block w-1 h-4 rounded-md bg-[var(--primary)] absolute left-[10px] top-[19px];
+    @apply content-[''] block w-1 h-4 rounded-md absolute left-[10px] top-[19px];
 }
 
 .link-card:hover .link-card__title,
