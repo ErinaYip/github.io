@@ -1,18 +1,19 @@
 ﻿---
 title: template模板
 published: 2023-07-13
+updated: 2025-09-04
 tags: ["C++", "算法"]
 category: 'C++'
 draft: false
 ---
 # C++ 模板
-> 模板是`泛型编程`的基础，`泛型编程`即以一种独立于`任何特定类型`的方式编写代码。
 
-## 函数模板
-> **模板函数定义的一般形式如下所示：**
+> 模板函数/类可以处理任意类型（泛型），编译时自动生成对应类型的代码。
+
+## 模板函数
 ```cpp
-template <typename type> ret-type func-name(parameter list)
-{
+template <typename type>
+return-type func-name(parameter list) {
    // 函数的主体
 }
 ```
@@ -23,60 +24,89 @@ template <typename type> ret-type func-name(parameter list)
 ```cpp
 #include <iostream>
 #include <string>
-using namespace std;
+
+using std::cout;
+
 template <typename T>
 inline T const& Max (T const& a, T const& b) { 
     return a < b ? b:a; 
 } 
-int main (){
+int main () {
     int i = 39;
     int j = 20;
-    cout << "Max(i, j): " << Max(i, j) << endl; 
+    cout << "Max(i, j): " << Max(i, j) << '\n'; 
 
     double f1 = 13.5; 
     double f2 = 20.7; 
-    cout << "Max(f1, f2): " << Max(f1, f2) << endl; 
+    cout << "Max(f1, f2): " << Max(f1, f2) << '\n'; 
 
-    string s1 = "Hello"; 
-    string s2 = "World"; 
-    cout << "Max(s1, s2): " << Max(s1, s2) << endl; 
+    std::string s1 = "Hello"; 
+    std::string s2 = "World"; 
+    cout << "Max(s1, s2): " << Max(s1, s2) << '\n'; 
 
     return 0;
 }
 ```
-### 输出
-```bash
+
+* **输出**
+
+``` 
 Max(i, j): 39
 Max(f1, f2): 20.7
 Max(s1, s2): World
 ```
 
-## 实例2
+### 实例2
 > 使用`template模板`实现的快读
 ```cpp
 #include<iostream>
-using namespace std;
+
+using std::cout;
 
 template <typename T>
-inline void read(T &a)
+inline void read(T& a)
 {
 	int s = 0, w = 1;
 	char ch = getchar();
-	while (ch < '0' || ch>'9'){
+	while (ch < '0' || ch>'9') {
 		if (ch == '-')
 			w = -1;
 		ch = getchar();
 	}
-	while (ch >= '0' && ch <= '9'){
+	while (ch >= '0' && ch <= '9') {
 		s = s * 10 + ch - '0';
 		ch = getchar();
 	}
 	a = s * w;
 }
 
-int main(){
+int main() {
     int n;
     read(n);
-    cout << n;
+    cout << n << '\n';
 }
 ```
+
+## 模板类
+
+### 实例
+```cpp
+template<typename T>
+class Box {
+public:
+    T value;
+};
+```
+
+
+
+
+
+
+---
+
+参考文献：
+
+[模板 - cppreference.cn - C++参考手册](https://cppreference.cn/w/cpp/language/templates)
+[Templates - cppreference.com](https://en.cppreference.com/w/cpp/language/templates.html)
+[C++ Templates Introduction | hacking C++](https://hackingcpp.com/cpp/lang/templates.html)
