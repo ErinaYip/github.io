@@ -107,6 +107,6 @@ public:
 
 参考文献：
 
-[模板 - cppreference.cn - C++参考手册](https://cppreference.cn/w/cpp/language/templates)
-[Templates - cppreference.com](https://en.cppreference.com/w/cpp/language/templates.html)
-[C++ Templates Introduction | hacking C++](https://hackingcpp.com/cpp/lang/templates.html)
+[模板 - cppreference.cn - C++参考手册](https://cppreference.cn/w/cpp/language/templates)  
+[Templates - cppreference.com](https://en.cppreference.com/w/cpp/language/templates.html)  
+[C++ Templates Introduction | hacking C++](https://hackingcpp.com/cpp/lang/templates.html)  

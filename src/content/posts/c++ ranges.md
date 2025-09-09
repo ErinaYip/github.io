@@ -8,7 +8,7 @@ draft: false
 ---
 # Ranges
 
-> C++20 在`std::ranges`命名空间中提供了大多数算法的受限版本，也就是受限算法，并且引入了范围库`（Ranges Library）`，其可组合且不易出错，功能十分强大。"
+> C++20 在`std::ranges`命名空间中提供了大多数算法的受限版本，也就是受限算法，并且引入了范围库`（Ranges Library）`，其可组合且不易出错，功能十分强大  
 > ~~让高贵的C++20玩家迭代器跟python的一样好用~~
 
 ## 视图 views
@@ -48,7 +48,7 @@ int main() {
     std::vector<int> nums = {1, 2, 3, 4, 5, 6};
 
     auto even = [](int n) { return n % 2 == 0; };
-	auto pow = [](int n) { return n * n; };
+    auto pow = [](int n) { return n * n; };
 
     for (auto x : nums | std::views::filter(even) | std::views::transform(pow)) {
         std::cout << x << " ";
@@ -87,7 +87,7 @@ int main() {
 
 
 ## 受限函数
-C++20 在 `<algorithm>` 头文件中为大多数算法都增加了定义于`std::ranges::`版本，这些函数可以直接传容器、view 或自定义范围对象，而不需要手动指定迭代器，比如：
+C++20 在 `<algorithm>` 头文件中为大多数算法都增加了定义于`std::ranges::`的版本，这些函数可以直接传入容器、view 或自定义范围对象，而不需要手动指定迭代器，比如：
 - `std::ranges::sort`
 - `std::ranges::find`
 - `std::ranges::min_element`
@@ -107,7 +107,8 @@ C++20 在 `<algorithm>` 头文件中为大多数算法都增加了定义于`std:
 int main() {
     std::vector<int> v = {5, 2, 8, 1};
     std::ranges::sort(v); // 直接对容器排序
-	for (const auto& i : v) { std::cout << i << ' '; }
+
+    for (const auto& i : v) { std::cout << i << ' '; }
     //输出 1 2 5 8
 }
 ```
@@ -121,15 +122,17 @@ int main() {
 
 int main() {
     std::vector<int> v = {5, 2, 8, 1};
+
     auto it = std::ranges::min_element(v); //返回一个迭代器
-	auto min = std::ranges::min(v); //直接返回值
     if (it != v.end()) { std::cout << *it << ' '; }
-	std::cout << min; // 输出 1 1
+
+    auto min = std::ranges::min(v); //直接返回值
+    std::cout << min;
 }
 ```
 
 * **示例(next_permutation)**
-* 
+
 ~~来猴戏一下全排列~~
 
 ```cpp
@@ -148,7 +151,7 @@ int main() {
 
 ~~猴戏还得是python~~
 
-```python
+```python title="python"
 from itertools import permutations
 
 a: str = "abc"
@@ -156,10 +159,23 @@ for p in permutations(a):
     print(' '.join(p))
 ```
 
+* **输出：**
+```
+a b c
+a c b
+b a c
+b c a
+c a b
+c b a
+```
 
-* **需要注意的是，**为了防止悬空迭代器，view（比如 filter 之后的结果）只返回`std::ranges::dangling`，正如其名，这个类型不是实际的容器，不能被受限函数们直接使用，如果希望保存views的结果，我们需要手动收集，**例如**：
+:::note
+为了防止悬空迭代器，view（比如 filter 之后的结果）只返回`std::ranges::dangling`，正如其名，这个类型不是实际的容器，不能被受限函数们直接使用
+:::
 
-```cpp
+如果希望保存views的结果，我们需要手动收集，**例如**：
+
+```cpp {11, 12, 14-18}
 #include <iostream>
 #include <vector>
 #include <ranges>
@@ -171,7 +187,7 @@ int main() {
     auto even = [](int n) { return n % 2 == 0; };
 
     // 使用 std::ranges::to 收集 （C++23)
-    // std::vector<int> evens = std::ranges::to<std::vector<int>>(numbers | std::views::filter(even));
+    std::vector<int> evens = std::ranges::to<std::vector<int>>(numbers | std::views::filter(even));
 
     // 直接遍历收集
     std::vector<int> evens;
@@ -192,6 +208,6 @@ int main() {
 
 参考文献：
 
-[Ranges library (since C++20) - cppreference.com](https://en.cppreference.com/w/cpp/ranges.html)
-[范围库（C++20 起）- cppreference.cn - C++参考手册](https://cppreference.cn/w/cpp/ranges)
-[受限算法（C++20 起）- cppreference.cn - C++参考手册](https://cppreference.cn/w/cpp/algorithm/ranges)
+[Ranges library (since C++20) - cppreference.com](https://en.cppreference.com/w/cpp/ranges.html)  
+[范围库（C++20 起）- cppreference.cn - C++参考手册](https://cppreference.cn/w/cpp/ranges)  
+[受限算法（C++20 起）- cppreference.cn - C++参考手册](https://cppreference.cn/w/cpp/algorithm/ranges)  
