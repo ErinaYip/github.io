@@ -1,5 +1,6 @@
 ---
 title: Shell printf
+description: "shell中printf命令的使用方法，包括基本语法、格式说明符、格式控制、字符转义和颜色输出等功能"
 published: 2025-10-03
 image: ''
 tags: ['Shell', 'Bash']

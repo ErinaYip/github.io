@@ -1,5 +1,6 @@
 ---
 title: pynput第三方库
+description: '通过python控制/监听键盘/鼠标行为的第三方库pynput的简单介绍'
 published: 2025-10-02
 image: ''
 tags: ['Python']
@@ -14,7 +15,7 @@ draft: false
 [read the docs官方文档](https://pynput.readthedocs.io/en/latest/index.html)
 
 :::warning
-这篇博客最早写于14年，最近找回来清库存，有些内容可能已经过时
+这篇博客最早写于23年，最近找回来清库存，有些内容可能已经过时
 :::
 
 ~~话说为什么python包都喜欢用Read The Docs做文档~~
