@@ -7,6 +7,7 @@ import swup from "@swup/astro";
 import { defineConfig } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
+import mermaid from "astro-mermaid";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeComponents from "rehype-components"; /* Render the custom directive content */
 import rehypeKatex from "rehype-katex";
@@ -31,6 +32,15 @@ export default defineConfig({
 	base: "/",
 	trailingSlash: "always",
 	integrations: [
+		mermaid({
+			theme: "dark",
+			autoTheme: true,
+			mermaidConfig: {
+				flowchart: {
+					curve: "basis",
+				},
+			},
+		}),
 		tailwind({
 			nesting: true,
 		}),
