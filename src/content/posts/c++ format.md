@@ -4,7 +4,6 @@ published: 2025-11-11
 tags: ["C++"]
 description: "C++ format库是一个现代、安全且快速的字符串格式化库，它提供了类似Python的格式化语法，并作为std::format被纳入C++20标准。"
 category: 'C++'
-draft: true
 ---
 
 `C++ 20`基于`Python`引入了一系列基本类型和字符串类型的格式规范[^1]，
