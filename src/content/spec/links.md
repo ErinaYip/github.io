@@ -4,7 +4,7 @@
 那些人，那些事
 
 <div class="link-card__container">
-  <a href="https://blog.erina.top/" class="link-card">
+  <a href="https://blog.erina.top/" class="link-card" target="_blank">
     <div class="link-card__info">
       <div class="link-card__title">ErinaYip</div>
       <div class="link-card__description">
@@ -25,7 +25,7 @@
 </div>
 
 <div class="link-card__container">
-  <a href="https://www.codeboy.site" class="link-card">
+  <a href="https://www.codeboy.site" class="link-card" target="_blank">
     <div class="link-card__info">
       <div class="link-card__title">CodeBoy</div>
       <div class="link-card__description">vitepress,blog,codeboy,tech,computer,technology,software,geek,IT,programming,algorithm,engineering,computer science,competitive programming</div>
@@ -42,5 +42,22 @@
   </a>
 </div>
 
+<div class="link-card__container">
+  <a href="https://nan0in27.cn" class="link-card" target="_blank">
+    <div class="link-card__info">
+      <div class="link-card__title">Nan0inPsyLog</div>
+      <div class="link-card__description">覆于这极夜不休而歌，直至无息-</div>
+      <div class="link-card__metadata">
+        <div class="link-card__domain">
+          <img class="link-card__favicon" src="https://nan0in27.cn/favicon.ico">
+          <span class="link-card__domain-name">nan0in27.cn</span>
+        </div>
+      </div>
+    </div>
+    <div class="link-card__thumbnail">
+      <img class="link-card__image" src="https://image.thum.io/get/width/300/crop/600/https://nan0in27.cn">
+    </div>
+  </a>
+</div>
 
 
