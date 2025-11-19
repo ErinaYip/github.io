@@ -3,7 +3,7 @@
 <!-- ::github{repo="saicaca/fuwari"} -->
 你好，很高兴认识你👋
 
-你可以叫我 Era
+我是 Era , 你可以叫我 Erina
 
 我是一名 学生、独立开发者、博主
 
