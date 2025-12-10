@@ -1,5 +1,11 @@
-
-# Python Monkey Patching
+---
+title: Python Monkey Patching
+published: 2025-12-09
+description: 'Monkey Patching（猴子补丁）是一种在运行时动态修改类或模块的技术。它允许我们在不修改源代码的情况下，改变或扩展已有代码的行为。'
+tags: ["Python"]
+category: 'Python'
+draft: false
+---
 
 ## 什么是Monkey Patching？
 
