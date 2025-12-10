@@ -56,7 +56,6 @@ export const navBarConfig: NavBarConfig = {
 export const profileConfig: ProfileConfig = {
 	avatar: "assets/images/avatar.png", // Relative to the /src directory. Relative to the /public directory if it starts with '/'
 	name: "Erina Yip",
-	// bio: "因为你的存在，因为伟大的戏剧正在上演，因为你可以奉献一首诗",
 	bio: "因为你的存在，因为伟大的戏剧正在上演，因为你可以奉献一首诗",
 	links: [
 		// {
@@ -65,11 +64,6 @@ export const profileConfig: ProfileConfig = {
 		// 	// You will need to install the corresponding icon set if it's not already included
 		// 	// `pnpm add @iconify-json/<icon-set-name>`
 		// 	url: "https://twitter.com",
-		// },
-		// {
-		// 	name: "Steam",
-		// 	icon: "fa6-brands:steam",
-		// 	url: "https://store.steampowered.com",
 		// },
 		{
 			name: "GitHub",
@@ -80,6 +74,12 @@ export const profileConfig: ProfileConfig = {
 			name: "Email",
 			icon: "fa6-solid:envelope",
 			url: "mailto:yip@erina.top",
+		},
+		{
+			name: "Rss",
+			icon: "fa6-solid:rss",
+			url: "rss.xml",
+			type: "short",
 		},
 	],
 };
