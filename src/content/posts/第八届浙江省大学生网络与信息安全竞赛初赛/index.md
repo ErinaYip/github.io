@@ -3,7 +3,7 @@ title: 第八届浙江省大学生网络与信息安全竞赛初赛 个人题解
 description: '第八届浙江省大学生网络与信息安全竞赛初赛中web的3题和数据安全的前两题wp'
 published: 2025-11-09
 image: ''
-tags: ['CTF']
+tags: ['CTF', 'WP', "WEB"]
 category: 'CTF'
 draft: false 
 ---
