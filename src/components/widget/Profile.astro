@@ -39,8 +39,8 @@ const config = profileConfig;
             )} -->
             {config.links.map(item =>
 				<a rel="me" aria-label={item.name} href={item.url} target="_blank"
-					class:list={["btn-regular rounded-lg h-10 active:scale-90 w-80", 
-						item.type != "short" && "w-10 gap-2 px-3 font-bold active:scale-95"]}
+					class:list={["btn-regular rounded-lg h-10", 
+						item.type != "short" ? "gap-2 px-3 font-bold active:scale-95" : "w-10 active:scale-90"]}
 				>
 					<Icon name={item.icon} class="text-[1.5rem]"></Icon>
 					{item.type != "short" && item.name}
