@@ -3,7 +3,7 @@ title: Werkzeug中pin码生成规则
 description: '深挖源码，得到flask中Werkzeug工具库实现debug mode的pin码的具体实现规则'
 published: 2025-11-10
 image: ''
-tags: ['Python', 'Werkzeug', 'flask']
+tags: ['Python', 'Werkzeug', 'flask', 'CTF', 'WEB']
 category: 'Python'
 draft: false 
 ---

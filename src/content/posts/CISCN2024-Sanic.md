@@ -1,6 +1,7 @@
 ---
 title: CISCN2024-Sanic
 published: 2025-12-11
+updated: 2025-12-12
 description: 'CISCN 2024 初赛题Sanic的wp'
 image: ''
 tags: ['CTF', 'WP', 'WEB']
@@ -191,7 +192,7 @@ def _unquote(str):  # no cov
     return "".join(res)
 ```
 
-看到这里我们的解法就清清晰了，这段代码会处理字符串中的引号转义和8进制字符转义，即我们编码`;`为6进制数即可绕过分割被成功解析：
+看到这里我们的解法就清清晰了，这段代码会处理字符串中的引号转义和8进制字符转义，即我们编码`;`为8进制数即可绕过分割被成功解析：
 
 ```python
 >>> ''.join(f'\\{ord(c):03o}' for c in ";")
@@ -360,7 +361,7 @@ class StaticMixin(BaseMixin, metaclass=SanicMeta):
         return self._generate_name(*objects)
 ```
 
-简单来说就是给name加上类名的前缀这个前缀一般就是`__mp_main__`,找他的过程比较长，我们可以直接输出看看，这里我一笔带过了，也是爬它的继承链最后找到`Sanic`类:
+简单来说就是给name加上类名，这个前缀一般就是`__mp_main__`，找他的过程比较长，我们可以直接输出看看，这里我一笔带过了，也是爬它的继承链最后找到`Sanic`类:
 ```python
 app.run(single_process=False) # startup.py::StartupMixin::run()
 -> startup.py::StartupMixin::serve()
@@ -673,12 +674,19 @@ class StaticHandleMixin(metaclass=SanicMeta):
 app.router.name_index['__mp_main__.static'].handler.keywords['directory_handler'].directory_view
 ```
 
-因为`file_or_directory`是个调用了`resolve()`方法的`Path`类，其中的路径被分割存在一个元组里：
-```python
-app.router.name_index['__mp_main__.static'].handler.keywords['directory_handler'].directory.parts
+因为`file_or_directory`是个调用了`resolve()`方法的`Path`类，这里卡了我好久，因为题目的python是3.11(ctfshow的环境)，那时候的pthlib还是个单文件库，里面定义了`_parts`列表存放目录的每一级，污染这个列表即可控制显示的根目录，但在3.12及以上的版本这个库就大改了，取而代之的是列表`_raw_paths`，本地打的话就要注意一下。
+
+
+```python title=python=3.11
+app.router.name_index['__mp_main__.static'].handler.keywords['directory_handler'].directory._parts
+```
+```python title=python>3.11
+app.router.name_index['__mp_main__.static'].handler.keywords['directory_handler'].directory._raw_paths
 ```
 
-污染这两个变量，就能实现遍历根目录，这道题就算做完了：
+> 写文章的时候发现python 3.14更新了，我们python佬的春节也是来了，在这里浅浅祝福一下$\pi$thon的发布
+
+污染这些变量，就能实现遍历根目录，这道题就算做完了：
 
 ```json
 {
