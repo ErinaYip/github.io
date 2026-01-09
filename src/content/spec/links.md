@@ -43,6 +43,24 @@
 </div>
 
 <div class="link-card__container">
+  <a href="http://spr1ng.top" class="link-card" target="_blank">
+    <div class="link-card__info">
+      <div class="link-card__title">spr1ng</div>
+      <div class="link-card__description">endowment师傅和share师傅的博客</div>
+      <div class="link-card__metadata">
+        <div class="link-card__domain">
+          <img class="link-card__favicon" src="http://120.27.213.206/wp-content/uploads/2025/11/cropped-生成-CTF-战队图标-32x32.png">
+          <span class="link-card__domain-name">spr1ng.top</span>
+        </div>
+      </div>
+    </div>
+    <div class="link-card__thumbnail">
+      <img class="link-card__image" src="https://image.thum.io/get/width/300/crop/600/http://spr1ng.top">
+    </div>
+  </a>
+</div>
+
+<div class="link-card__container">
   <a href="https://nan0in27.cn" class="link-card" target="_blank">
     <div class="link-card__info">
       <div class="link-card__title">Nan0inPsyLog</div>
