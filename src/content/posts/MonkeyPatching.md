@@ -9,6 +9,8 @@ draft: false
 
 ## 什么是Monkey Patching？
 
+像`Python`、`JavaScript`、`Lua`等动态类型且大部分类在运行时开放的语言，我们就能在运行时动态更改某个类属性、方法，从而改变其行为，这就称为`Monkey Patching`。
+
 `Monkey Patching`（猴子补丁）是一种在运行时动态修改类或模块的技术。这个术语来源于`guerrilla patch`（游击队补丁），后来演变成了`monkey patching`。它允许我们在不修改源代码的情况下，改变或扩展已有代码的行为。
 
 ## 为什么使用Monkey Patching？
@@ -19,6 +21,10 @@ draft: false
 4. **性能优化**：替换某些方法的实现以提高性能
 
 ## 基本示例
+
+### Python
+
+在`python`中，一切皆为对象，且python没有严格意义上的私有变量，类开放，这样灵活的运行时环境使得python天生及其适合`Monkey Patching`，实际上，它也是最常使用`Monkey Patching`的语言之一。
 
 ```python
 # 原始类
@@ -94,7 +100,7 @@ class TestMyApp(unittest.TestCase):
 
 ~~其实这才是写这篇文章的主要原因，为醋包饺子的典范了~~
 
-在处理json web token时，如果服务端配置不当，将`RS256`加密的jwt直接使用公钥`HS256`解密，我们获得公钥之后就能直接未在jwt，从而得到高级权限
+在处理json web token时，如果服务端配置不当，将`RS256`加密的jwt直接使用公钥`HS256`解密，我们获得公钥之后就能直接伪造jwt，从而得到高级权限
 
 ```python
 import jwt
