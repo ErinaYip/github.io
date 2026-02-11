@@ -2,13 +2,14 @@
 title: furryCTF 个人题解
 description: 'furryCTF web方向的wp'
 published: 2026-02-08
+updated: 2026-02-11
 image: ''
 tags: ['CTF', 'WP', "WEB"]
 category: 'CTF'
 draft: false 
 ---
 
-furryCTF虽然名字不是很好，但题是很舒服地ak了，刚刚被siscn爆揍的我做这些题总算是舒服了一点了，现在这个时间节点启还有SHCTF前两周目倒是ak了，航杯刚打完，又被薄纱了，HGAME更是第一题都不会，www
+furryCTF虽然名字不是很好，但题是很舒服地ak了，刚刚被siscn爆揍的我做这些题总算是舒服了一点了，现在这个时间节点启还有SHCTF前两周目倒是ak了，启航杯刚打完，又被薄纱了，HGAME更是第一题都不会，www
 
 ## 固若金汤(热身赛)
 
