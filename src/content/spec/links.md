@@ -43,7 +43,7 @@
 </div>
 
 <div class="link-card__container">
-  <a href="http://spr1ng.top" class="link-card" target="_blank">
+  <a href="http://120.27.213.206/" class="link-card" target="_blank">
     <div class="link-card__info">
       <div class="link-card__title">spr1ng</div>
       <div class="link-card__description">endowment师傅和share师傅的博客</div>
@@ -55,7 +55,7 @@
       </div>
     </div>
     <div class="link-card__thumbnail">
-      <img class="link-card__image" src="https://image.thum.io/get/width/300/crop/600/http://spr1ng.top">
+      <img class="link-card__image" src="https://image.thum.io/get/width/300/crop/600/http://120.27.213.206/">
     </div>
   </a>
 </div>
