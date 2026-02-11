@@ -877,7 +877,7 @@ O:11:"UserProfile":3:{
 }";s:10:"preference";O:13:"DateFormatter":0:{}} 
 ```
 
-当然，眼间的师傅就发现了，这样最后不是会多出来奇怪的东西吗，这个我们确实无法避免，但是海纳百川的php还是能正常反序列化，顶多是报个**Warning**: unserialize(): Error at offset xxx ~~(怪不得是黑客最喜欢的语言)~~
+当然，眼尖的师傅就发现了，这样最后不是会多出来奇怪的东西吗，这个我们确实无法避免，但是海纳百川的php还是能正常反序列化，顶多是报个**Warning**: unserialize(): Error at offset xxx ~~(怪不得是黑客最喜欢的语言)~~
 
 以下就是生成此payload的暴力代码：
 
