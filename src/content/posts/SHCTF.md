@@ -1060,7 +1060,7 @@ public class Note implements Serializable {
 }
 ```
 
-这里使用 Java 11 的 HttpClient 类来发包，可以少些不少代码，~~虽然还是很多~~
+这里使用 Java 11 的 HttpClient 类来发包，可以少写不少代码，~~虽然还是很多~~
 
 ## BabyJavaUpload
 
@@ -1252,6 +1252,4 @@ ctf          128     127  0 10:46 ?        00:00:00 ps -ef
 很明显，这里PID 25 的进程：
 - `script -q -f -c bash -li -c "echo 0dy9e6 | sudo -S -v >/dev/null 2>&1; sleep infinity" /dev/null`
 
-`echo 0dy9e6 | sudo -S -v`直接写明了sudo密码为`0dy9e6`，这里我们也懒得搞交互shell了，直接模仿这个进程的写法，执行：`script -q -c "echo 0dy9e6 | sudo -S cat /flag"`，即可得到flag。
-
-注意这里的`-S`参数就是允许sudo从管道接受密码。
+`echo 0dy9e6 | sudo -S -v`直接写明了sudo密码为`0dy9e6`，配合`-S`参数允许sudo从管道接受密码，我们就能直接得到root权限了。但是注意，因为sudo会新开shell，system函数那不到这个结果，所以我们仿照这段命令，使用script命令得到完整的输出：`script -q -c "echo 0dy9e6 | sudo -S cat /flag"`。
