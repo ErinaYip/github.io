@@ -32,7 +32,9 @@
         <span class="anchor-icon" data-pagefind-ignore="">#</span></a></h2>
 
 <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
+    <img style="border-radius:0;cursor:default;margin-bottom:4px;margin-top:4px;" src="https://img.shields.io/static/v1?style=for-the-badge&message=nixos&color=5277C3&logo=nixos&logoColor=FFFFFF&label=">
     <img style="border-radius:0;cursor:default;margin-bottom:4px;margin-top:4px;" src="https://img.shields.io/static/v1?style=for-the-badge&message=cachyos&color=1793D1&logo=linux&logoColor=FFFFFF&label=">
+    <img style="border-radius:0;cursor:default;margin-bottom:4px;margin-top:4px;" src="https://img.shields.io/static/v1?style=for-the-badge&message=niri&color=D55C44&logo=niri&logoColor=FFFFFF&label=">
     <img style="border-radius:0;cursor:default;margin-bottom:4px;margin-top:4px;" src="https://img.shields.io/static/v1?style=for-the-badge&message=hyprland&color=58E1FF&logo=hyprland&logoColor=FFFFFF&label=">
     <img style="border-radius:0;cursor:default;margin-bottom:4px;margin-top:4px;" src="https://img.shields.io/static/v1?style=for-the-badge&message=wayland&color=FFBC00&logo=wayland&logoColor=FFFFFF&label=">
     <img style="border-radius:0;cursor:default;margin-bottom:4px;margin-top:4px;" src="https://img.shields.io/static/v1?style=for-the-badge&message=archlinux&color=1793D1&logo=archlinux&logoColor=FFFFFF&label=">
