@@ -891,7 +891,7 @@ except Exception as e: print(e)
 
 ### os
 
-之前也看到，`os`的被赋值为了`not allowed`，我们想要得到**模块os**，就要先删除这个**字符串os**，再重新导入：
+之前也看到，`os`被赋值为了`not allowed`，我们想要得到**模块os**，就要先删除这个**字符串os**，再重新导入：
 
 ```python
 modules = ｓｙｓ.modules
@@ -927,7 +927,7 @@ modules[chr(111)+chr(115)] = OS
 print(OS.ｐｏｐｅｎ(chr(108)+chr(115)+chr(32)+chr(47)).ｒｅａｄ())
 ```
 
-注意这里的`modules[chr(111)+chr(115)] = OS`复原`os`是必要的，因为`os.popen`在 Python 3 中本质上就是`subprocess.Popen`的一个封裝，而`subprocess`模块初始化时又需要用到`os`内的函数，不加就会遇到以下报错：
+注意这里用`modules[chr(111)+chr(115)] = OS`还原`os`是必要的，因为`os.popen`在 Python 3 中本质上就是`subprocess.Popen`的一个封裝，而`subprocess`模块初始化时又需要用到`os`内的函数，不加就会遇到以下报错：
 
 ```python
 Traceback (most recent call last):
