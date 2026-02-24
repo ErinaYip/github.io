@@ -445,7 +445,7 @@ def send_input():
 
 ## 下一代有下一代的问题
 
-考的是CVE-2025-55182，就是siscn一模一样的，直接拿现成的poc打。
+考的是CVE-2025-55182，就是ciscn一模一样的，直接拿现成的poc打。
 
 [zzhorc/CVE-2025-55182: CVE-2025-55182复现环境及RCE回显poc](https://github.com/zzhorc/CVE-2025-55182)
 
